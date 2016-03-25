@@ -1,27 +1,23 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
-
-import urllib
-from BeautifulSoup import *
+import requests
+from bs4 import *
 import sys 
 import wget
 
-url = "http://www.asambleanacional.gob.ve/documento/show2/id/64"
-#url  = raw_input('Enter URL -> ')
-#pattern = raw_input('Enter search pattern-> ')
-pattern = 'documentos'
+url  = raw_input('Enter URL -> ')
+pattern = raw_input('Enter search pattern-> ')
 
-html = urllib.urlopen(url).read()
+html = requests.get(url)
 
 
-dir_download = "./download/"
 
-if html.find("400 Bad Request") != -1:
+
+if html.text.find("400 Bad Request") != -1:
 	print ("Bad Request")
 	sys.exit()
 
-soup = BeautifulSoup(html)
-#print soup.prettify()
+soup = BeautifulSoup(html.text)
 
 tags = soup('a')
 
@@ -31,9 +27,8 @@ for tag in tags:
 	text = str(url)
 	if text.find(pattern) == -1: continue
 	urldownload +=  text
-	print "Retrieve: ", tag.contents[0],  urldownload
+	print ("Retrieve: {0},{1}".format(tag.contents[0],urldownload))
 	file = 	text.split("/")[-1]
 	path_and_file = dir_download + file
 	wget.download(urldownload)		
 	
-
