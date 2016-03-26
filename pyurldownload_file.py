@@ -36,7 +36,7 @@ for tag in tags:
 		with open(path_and_file, "wb") as f:
 			f.write(r.content)
 	except ConnectionError:
-		print("I can't download file: {0}".format(file))
+		print("Can't download file: {0}".format(file))
 	except HTTPError:
-		print("I can't download file: {0}".format(file))
+		print("Can't download file: {0}".format(file))
 	f.close()
