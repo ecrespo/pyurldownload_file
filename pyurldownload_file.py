@@ -3,7 +3,6 @@
 import requests
 from bs4 import *
 import sys 
-import wget
 
 
 url  = input('Enter URL -> ')
@@ -25,7 +24,8 @@ tags = soup('a')
 for tag in tags:
 	url_path = tag.get('href',None)
 	text = str(url_path)
-	if text.find(pattern) == -1: continue
+	if text.find(pattern) == -1: 
+		continue
 	domain = url.split("http://")[1].split("/")[0]
 	urldownload = "http://" + domain + text
 	print ("Retrieve: {0},{1}".format(tag.contents[0],urldownload))
