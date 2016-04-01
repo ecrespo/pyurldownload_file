@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 import requests
-from bs4 import *
-import sys 
+import bs4
+import sys
 
 
 url  = input('Enter URL -> ')
@@ -17,14 +17,14 @@ if html.text.find("400 Bad Request") != -1:
 	print ("Bad Request")
 	sys.exit()
 
-soup = BeautifulSoup(html.text)
+soup = bs4.BeautifulSoup(html.text)
 
 tags = soup('a')
 
 for tag in tags:
 	url_path = tag.get('href',None)
 	text = str(url_path)
-	if text.find(pattern) == -1: 
+	if text.find(pattern) == -1:
 		continue
 	domain = url.split("http://")[1].split("/")[0]
 	urldownload = "http://" + domain + text
