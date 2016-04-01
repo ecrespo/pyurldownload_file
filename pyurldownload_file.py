@@ -22,7 +22,7 @@ soup = bs4.BeautifulSoup(html.text)
 tags = soup('a')
 
 for tag in tags:
-	url_path = tag.get('href',None)
+	url_path = tag.get('href')
 	text = str(url_path)
 	if text.find(pattern) == -1:
 		continue
